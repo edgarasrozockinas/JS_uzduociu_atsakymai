@@ -23,15 +23,32 @@ async function readGithubUsers() {
     let responseData = await fetch(ENDPOINT);
     let userData = await responseData.json();
     console.log(userData);
-    userData.forEach(element => {
-        let newLine = document.createElement("p");
 
-        newLine.innerHTML = `<strong>${element.login}</strong>` + " " + element.avatar_url;
+    userData.forEach(element => {
         
-        document.querySelector("#output").appendChild(newLine);
+        let newCard = document.createElement("div");
+        newCard.setAttribute("id", "card");
+
+        let userName  = document.createElement("h2");
+        userName.innerHTML = `<strong>${element.login}</strong>`;
+
+        let newPhoto = document.createElement("img");
+        newPhoto.setAttribute("src", `${element.avatar_url}`);
+        newPhoto.setAttribute("alt", `${element.avatar_url}`);
+
+        newPhoto.setAttribute("width", "");
+
+        
+        
+        newCard.appendChild(userName);
+        newCard.appendChild(newPhoto);
+        document.querySelector("#output").appendChild(newCard);
+
+
 
 
     });
+    document.getElementById('message').style.display='none';
     document.querySelector("#output").style.backgroundColor = "rgb(83, 130, 164)";
 }
 
